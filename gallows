@@ -1,0 +1,34 @@
+import random
+
+words = ["игра", "машина", "компьютер"]
+bykvi = []
+pystota = []
+live = 3
+u = "-"
+random_words = random.choice(words)
+
+for i in random_words:
+    bykvi.append(i)
+    pystota.append("-")
+
+print("Загаданное слово (по буквам):", bykvi)
+
+def proverka(live):
+    print("Текущее состояние слова:", "".join(pystota))
+    bukva = input("Введите букву: ")
+    if bukva in bykvi:
+        for index, letter in enumerate(bykvi):
+            if bukva == letter:
+                pystota[index] = bukva
+    else:
+        live -= 1
+        print(f"Неверная буква. Осталось жизней: {live}")
+    return live
+
+while live > 0:
+    if "-" not in pystota:
+        break
+    live = proverka(live)
+
+if live == 0:
+    print("Вы проиграли. Было загадано слово:", random_words)
